@@ -4,7 +4,6 @@ function Player(nickname){
 }
 Player.prototype.play = function(){
     this.playedMatch++;
-    console.log(this.nickname + this.playedMatch)
 }
 Player.prototype.getTierlevel = function(){
     if (this.playedMatch < 4){
@@ -17,4 +16,16 @@ Player.prototype.getTierlevel = function(){
 }
 const player0 = new Player("gomszab")
 console.log(player0)
+console.log(player0.getTierlevel())
 player0.play()
+player0.play()
+player0.play()
+player0.play()
+console.log(player0)
+console.log(player0.getTierlevel())
+player0.play()
+player0.play()
+player0.play()
+player0.play()
+console.log(player0)
+console.log(player0.getTierlevel())
