@@ -17,17 +17,23 @@ Player.prototype.getTierlevel = function(){
     }
 }
 const player0 = new Player("gomszab")
-console.log(player0)
-console.log(player0.getTierlevel())
-player0.play()
-player0.play()
-player0.play()
 player0.play()
 console.log(player0)
 console.log(player0.getTierlevel())
-player0.play()
-player0.play()
-player0.play()
-player0.play()
-console.log(player0)
-console.log(player0.getTierlevel())
+
+class Person{
+    constructor(name) {
+        this.name = name;
+    }
+    getName(){
+        return this.name;
+    }
+}
+const person0 = new Person("Géza")
+
+class Student extends Person{
+    constructor(school) {
+        this.school = school;
+    }
+}
+console.log(person0.getName())
