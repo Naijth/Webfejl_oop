@@ -14,5 +14,12 @@ class Companion{
         this.kerNev = kerNev;
         this.vezNev = vezNev;
         this.reszleg = reszleg;
+        this.productList = [];
+    }
+    nevGet(){
+        return this.kerNev + " " + this.vezNev;
+    }
+    productAdd(newProduct){
+        this.productList.push(newProduct);
     }
 }
