@@ -1,7 +1,18 @@
 class Factory{
-    // TODO 1, 2, 3, 4, 9, 10
+    constructor(){
+        this.manoList = [];
+    }
+    manoAdd(mano){
+        this.manoList.push(mano);
+    }
+    // TODO 9, 10
 }
    
 class Companion{
-    // TODO 5
+    constructor(id, kerNev, vezNev, reszleg){
+        this.id = id;
+        this.kerNev = kerNev;
+        this.vezNev = vezNev;
+        this.reszleg = reszleg;
+    }
 }
