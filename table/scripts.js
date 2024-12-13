@@ -29,29 +29,33 @@ class Person {
         this.lastname = obj.lastname;
     }
     /**
-     * This beautiful babygirl adds the values in the constructor to the called variable
+     * This beautiful babygirl adds the values in the constructor to the called variable.
      */
     render(parentElement){
         const tr = document.createElement("tr");
         parentElement.appendChild(tr);
+        const td3 = document.createElement("td");
+        td3.innerHTML = this.lastname;
+        tr.appendChild(td3)
         const td1 = document.createElement("td");
         td1.innerHTML = this.firstname1;
         tr.appendChild(td1);
         if(this.firstname2 == undefined){
-            td1.rowSpan = 2;
+            td1.colSpan = 2;
         } else{
             const td2 = document.createElement("td");
             td2.innerHTML = this.firstname2;
             tr.appendChild(td2);
         }
-        const td3 = document.createElement("td");
-        td3.innerHTML = this.lastname;
-        tr.appendChild(td3)
     }
 }
+/**
+ * This beautiful lady wih big bazongas just writes into the table/tbody defined within the getElementById and vomits them directly into it. Great success
+ */
 function init(){
     for (const person of array){
         const per = new Person(person)
-        
+        per.render(document.getElementById("tbodyId"))
     }
 }
+init()
