@@ -50,12 +50,48 @@ class Person {
     }
 }
 /**
- * This beautiful lady wih big bazongas just writes into the table/tbody defined within the getElementById and vomits them directly into it. Great success
+ * This hottie returns the values contained within the form. Would smash.
+ */
+class FromController{
+    #form
+    constructor(form){
+        this.#form = form;
+    }
+    #getInputById(id){
+        return this.#form.querySelector('#' + id);
+    }
+    get lastname(){
+        const value = this.#getInputById('');
+        return value;
+    }
+    get firstname1(){
+        const value = this.#getInputById('');
+        return value;
+    }
+    get firstname2(){
+        const value = this.#getInputById('');
+        return value;
+    }
+}
+/**
+ * This beautiful lady wih big bazongas writes into the table/tbody defined within the getElementById and vomits them directly into it. 
+ * It also allows us to render the stuff written in the form.(which don work)
  */
 function init(){
+    const form = document.getElementById("form");
     for (const person of array){
-        const per = new Person(person)
-        per.render(document.getElementById("tbodyId"))
+        const pers = new Person(person);
+        pers.render(document.getElementById("tbodyId"));
     }
+    const fromController = new FromController(form)
+    form.addEventListener('submit', function (e){
+        e.preventDefault();
+        const obj = {
+            firstname1: fromController.firstname1,
+            firstname2: fromController.firstname2,
+            lastname: fromController.lastname,};
+        const pers = new Person(obj);
+        pers.render(document.getElementById("tbodyId"))
+    })
 }
 init()
