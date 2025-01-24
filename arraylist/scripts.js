@@ -10,8 +10,6 @@ class ArrayList {
         return this.#length;
     }
 
-    
-
     constructor(){
         this.#length = 0;
         this.#state = {};
@@ -40,7 +38,8 @@ class ArrayList {
                     this.#state[index] = value;
                 },
                 //writable: true
-                enumerable: true
+                enumerable: true,
+                configurable: true
             })
         this.#length++; //increments length by one
     }
