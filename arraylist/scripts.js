@@ -31,10 +31,10 @@ class ArrayList {
         //with this we can reach the added item
         Object.defineProperty(this, index, 
             {
-                get: function(){
+                get: () => {
                     return this.#state[index];
                 },
-                set: function(value){
+                set: (value) => {
                     this.#state[index] = value;
                 },
                 //writable: true
