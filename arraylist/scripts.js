@@ -5,22 +5,23 @@ class ArrayList {
      */
     #length; 
     #state;
+    #tableArray;
 
     get Count(){
         return this.#length;
     }
 
-    constructor(){
+    constructor(array = undefined){
         this.#length = 0;
         this.#state = {};
+        this.#tableArray = array;
     }
 
     //this fella checks if the input can be located anywhere within the array
     Contains(item){
         for(const value in this.#state){
-            if(this.#state[value] == item){
+            if(this.#state[value] == item)
                 return true; 
-            }
         }
         return false;
     }
@@ -41,18 +42,21 @@ class ArrayList {
                 enumerable: true,
                 configurable: true
             })
+        if (this.#tableArray)
+            this.#tableArray.addPersonRow(item);
         this.#length++; //increments length by one
     }
 
     Clear(){
         this.#length = 0; //sets it back to og value
         this.#state = {}; //sets it back to og value
-        for(const key in this){
-            delete this[key] //removes the getters and setters
-        }        
+        for(const key in this)
+            delete this[key]; //removes the getters and setters
     }
 }
 
+/**
+ * This but a test. Completely unnecessary
 const test = new ArrayList();
 
 const testValue1 = {value: 46};
@@ -67,6 +71,7 @@ console.log(test.Contains(testValue2));
 console.log(test.Contains(testValue3));
 
 console.log(test);
+*/
 
 class arrayHTMLElement extends HTMLElement{
     #tbody
@@ -85,33 +90,43 @@ class arrayHTMLElement extends HTMLElement{
      * @param {{name: String, age: Number}} item 
      */
     addPersonRow(item){
-        const a = document.createElement('tr');
-        this.#tbody.appendChild(a);
+        const tr = document.createElement('tr');
+        this.#tbody.appendChild(tr);
 
-        const b = document.createElement('td');
-        b.innerHTML = item.name;
-        a.appendChild(b);
+        const td1 = document.createElement('td');
+        td1.innerHTML = item.name;
+        tr.appendChild(td1);
 
-        const c = document.createElement('td');
-        c.innerHTML = item.age;
-        a.appendChild(c);
+        const td2 = document.createElement('td');
+        td2.innerHTML = item.age;
+        tr.appendChild(td2);
     }
 }
 
-customElements.define(
-    'array-table',
-    arrayHTMLElement
-)
+const button = document.createElement('button')
+button.innerHTML = "Add"
+document.body.appendChild(button)
 
+customElements.define('array-table', arrayHTMLElement)
 const something = new arrayHTMLElement();
 document.body.appendChild(something);
 
-const pers1 = {
+const test = new ArrayList(something);
+test.Add({
     name: 'Nagy István',
     age: 32
-}
+})
+test.Add({
+    name: 'Nagy István',
+    age: 32
+})
 
-something.addPersonRow(pers1);   
+button.addEventListener('click', (e) =>{
+    test.Add({
+        name: 'Nagy István',
+        age: 32
+    })
+})
 
 /**
  * Just an example

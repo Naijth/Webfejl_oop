@@ -1,3 +1,4 @@
+/**
 function fun(param){
     console.log(param.value);
 }
@@ -8,9 +9,7 @@ const funA = function(param){
     console.log(param.value);
 }
 
-/**
  * this is dogshit and should NEVER be used
- */
 const funB = function(){
     console.log(this.value);
 }
@@ -37,3 +36,4 @@ egg(); // this is dogshit and should NEVER be used
 funC({value: 'I will cum'});
 obj.funA(pers);
 obj.funB(pers);
+*/
