@@ -43,7 +43,7 @@ class ArrayList {
                 configurable: true
             })
         if (this.#tableArray)
-            this.#tableArray.addPersonRow(item);
+            this.#tableArray.AddPersonRow(item);
         this.#length++; //increments length by one
     }
 
@@ -89,7 +89,7 @@ class arrayHTMLElement extends HTMLElement{
     /**
      * @param {{name: String, age: Number}} item 
      */
-    addPersonRow(item){
+    AddPersonRow(item){
         const tr = document.createElement('tr');
         this.#tbody.appendChild(tr);
 
