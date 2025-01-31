@@ -76,7 +76,7 @@ console.log(test);
 class arrayHTMLElement extends HTMLElement{
     #tbody
     constructor(){
-        super(); // default
+        super(); //default
     }
     connectedCallback(){
         const table = document.createElement('table');
