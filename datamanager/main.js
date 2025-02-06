@@ -49,11 +49,12 @@ class DataManagerClass {
          */
         const result = []
 
-        for (const elem of this.#array){
-            if (elem.age.includes(ageA)){
-                result.push(elem);
+        for (const item of this.#array){
+            if (item.age == ageA){
+                result.push(item);
             }
         }
+        this.#updateCallback(result);
     }
 
     /**
@@ -65,15 +66,17 @@ class DataManagerClass {
          */
         const result = []
 
-        for (const elem of this.#array){
-            if (elem.name.includes(nameA)){
-                result.push(elem);
+        for (const item of this.#array){
+            if (item.name.includes(nameA)){
+                result.push(item);
             }
         }
+        this.#updateCallback(result);
     }
 }
 
 class TableClass {
+    #tbody;
     /**
      * @param {DataManagerClass} dataManager
      */
@@ -87,36 +90,39 @@ class TableClass {
         /**
          * @type {HTMLElement}
          */
-        const tbody = document.createElement('tbody');
-        table.appendChild(tbody);
+        this.#tbody = document.createElement('tbody');
+        table.appendChild(this.#tbody);
 
         dataManager.setUpdateCallback(
             (people) => {
-                tbody.innerHTML = '';
-                for (const pers of people) {
-                    /**
-                     * @type {HTMLElement}
-                     */
-                    const tr = document.createElement('tr');
-                    tbody.appendChild(tr);
-
-                    /**
-                     * @type {HTMLElement}
-                     */
-                    const td1 = document.createElement('td');
-                    td1.innerHTML = pers.name
-                    tr.appendChild(td1);
-
-                    /**
-                     * @type {HTMLElement}
-                     */
-                    const td2 = document.createElement('td');
-                    td2.innerHTML = pers.age
-                    tr.appendChild(td2);
-                }
+                this.#renderTable(people)
             }
         )
     }
+    #renderTable(people) {
+        this.#tbody.innerHTML = '';
+        for (const pers of people) {
+            /**
+             * @type {HTMLElement}
+             */
+            const tr = document.createElement('tr');
+            this.#tbody.appendChild(tr);
+
+            /**
+             * @type {HTMLElement}
+             */
+            const td1 = document.createElement('td');
+            td1.innerHTML = pers.name
+            tr.appendChild(td1);
+
+            /**
+             * @type {HTMLElement}
+             */
+            const td2 = document.createElement('td');
+            td2.innerHTML = pers.age
+            tr.appendChild(td2);
+        }
+    } 
 }
 
 const data_manager = new DataManagerClass([{name: "Feri", age: 17}, 
@@ -125,7 +131,17 @@ const data_manager = new DataManagerClass([{name: "Feri", age: 17},
 ]);
 const data_class = new TableClass(data_manager);
 
-const input = document.createElement('input')
-document.body.appendChild(input)
+const inputName = document.createElement('input');
+document.body.appendChild(inputName);
+inputName.addEventListener('input', function(e){
+    data_manager.filterName(inputName.value)
+});
+
+const inputAge = document.createElement('input');
+document.body.appendChild(inputAge);
+inputAge.addEventListener('input', function(e){
+    let ageNumber = Number(inputAge.value)
+    data_manager.filterAge(ageNumber)
+});
 
 //input.addEventListener('input', function(e)) => { }
