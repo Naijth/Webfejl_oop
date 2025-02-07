@@ -125,9 +125,14 @@ class TableClass {
     } 
 }
 
+function addBr() {
+    const br = document.createElement('br')
+    document.body.appendChild(br)
+}
+
 const data_manager = new DataManagerClass([{name: "Feri", age: 17}, 
     {name: "Géza", age: 17},
-    {name: "Józsi", age: 18},
+    {name: "Józsi", age: 18}
 ]);
 const data_class = new TableClass(data_manager);
 
@@ -136,6 +141,7 @@ document.body.appendChild(inputName);
 inputName.addEventListener('input', function(e){
     data_manager.filterName(inputName.value)
 });
+addBr();
 
 const inputAge = document.createElement('input');
 document.body.appendChild(inputAge);
@@ -143,5 +149,20 @@ inputAge.addEventListener('input', function(e){
     let ageNumber = Number(inputAge.value)
     data_manager.filterAge(ageNumber)
 });
+addBr();
 
 //input.addEventListener('input', function(e)) => { }
+
+const inputFile = document.createElement('input');
+document.body.appendChild(inputFile);
+inputFile.type = "file";
+inputFile.addEventListener('change', function(e){
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = (e) => {
+        const fileData = reader.result;
+        fileData.split('\n')
+        console.log(fileData);
+    }
+});
