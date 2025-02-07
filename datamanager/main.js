@@ -38,23 +38,7 @@ class DataManagerClass {
      */
     add(item){
         this.#array.push(item);
-    }
-
-    /**
-     * @param {Number} ageA
-     */
-    filterAge(ageA){
-        /**
-         * @type {Person[]}
-         */
-        const result = []
-
-        for (const item of this.#array){
-            if (item.age == ageA){
-                result.push(item);
-            }
-        }
-        this.#updateCallback(result);
+        this.#updateCallback(this.#array)
     }
 
     /**
@@ -68,6 +52,20 @@ class DataManagerClass {
 
         for (const item of this.#array){
             if (item.name.includes(nameA)){
+                result.push(item);
+            }
+        }
+        this.#updateCallback(result);
+    }
+
+    /**
+     * @param {function(Person):boolean} callback 
+     */
+    filter(callback){
+        const result = []
+
+        for (const item of this.#array){
+            if (callback(item)){
                 result.push(item);
             }
         }
@@ -130,16 +128,19 @@ function addBr() {
     document.body.appendChild(br)
 }
 
-const data_manager = new DataManagerClass([{name: "Feri", age: 17}, 
+const dataManager = new DataManagerClass([{name: "Feri", age: 17}, 
     {name: "Géza", age: 17},
     {name: "Józsi", age: 18}
 ]);
-const data_class = new TableClass(data_manager);
+const dataClass = new TableClass(dataManager);
 
 const inputName = document.createElement('input');
 document.body.appendChild(inputName);
 inputName.addEventListener('input', function(e){
-    data_manager.filterName(inputName.value)
+    dataManager.filter((
+        pers) => {
+        return pers.name.includes(inputName);
+    })
 });
 addBr();
 
@@ -147,7 +148,9 @@ const inputAge = document.createElement('input');
 document.body.appendChild(inputAge);
 inputAge.addEventListener('input', function(e){
     let ageNumber = Number(inputAge.value)
-    data_manager.filterAge(ageNumber)
+    dataManager.filter((pers) => {
+        return pers.age == ageNumber;
+    })
 });
 addBr();
 
@@ -161,8 +164,12 @@ inputFile.addEventListener('change', function(e){
     const reader = new FileReader();
     reader.readAsText(file);
     reader.onload = (e) => {
-        const fileData = reader.result;
-        fileData.split('\n')
-        console.log(fileData);
+        const fileDataSplit = reader.result.split('\n');
+        for (const pers of fileDataSplit) {
+            const data = pers.split(';');
+            Number(data[1])
+            const splitPers = {name: data[0], age: data[1]};
+            dataManager.add(splitPers);
+        }
     }
 });
