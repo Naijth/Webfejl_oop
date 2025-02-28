@@ -17,10 +17,18 @@ class Manager{
 
     add(student){
         this.#array.push(student);
-        this.#addCallback(student);
     }
 
     select(student){
         this.#selectCallback(student);
+    }
+
+    /**
+     * iterates throuugh the array and calls addCallBack
+     */
+    render(){
+        for (const student of this.#array){
+            this.#addCallback(student)
+        }
     }
 }
