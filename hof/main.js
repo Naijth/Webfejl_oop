@@ -28,3 +28,4 @@ const fv4 = fv3('-');
 console.log(res1);
 console.log(fv4(5, 7));
 console.log(fv2(5, 7, fv3('-')));
+console.log(fv2(0, 7, fv3('*2')));
